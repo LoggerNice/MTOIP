@@ -87,10 +87,13 @@ body {
     background-color: white;
     border: 2px solid #832492;
     color: #832492;
+    cursor: pointer;
 }
 
 .inputs > p {
     font-size: 14px;
+    text-align: center;
+    margin-top: 0;
 }
 
 
