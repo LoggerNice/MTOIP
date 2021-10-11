@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+    <title>Обратная связь</title>
+
+    <style>
+    * {
+        margin: 0 auto;
+        padding: 0;
+
+        font-family: 'Montserrat', sans-serif;
+    }
+
+    body {
+        background-color: #832492;
+        font-weight: 400;
+    }
+
+    .block {
+        width: auto;
+        height: auto;
+
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+        align-content: center;
+    }
+
+    .main {
+        margin: 10% 0;
+
+        width: 600px;
+        height: 600px;
+        
+        border-radius: 20px;
+        background-color: white;
+        filter: drop-shadow(0 0 20px #ffffffce);
+    }
+
+    
+    .header {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        justify-content: space-around;
+    }
+
+    .header > a, p {
+        margin: 40px 0 80px 0;
+        font-weight: 700;
+        font-size: 24px;
+        color: #222;
+        text-decoration: none;
+    }
+
+    .inputs > textarea {
+        width: 400px;
+        resize: none;
+        overflow: auto;
+    }
+
+    .inputs {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+    }   
+
+    .inputs > input, textarea {
+        font-size: 18px;
+
+        width: 300px;
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+        
+        text-decoration: none;
+        outline: none;
+        border: none;
+        border-bottom: 2px solid #832492;
+    }
+
+    .inputs > textarea:placeholder-shown {
+        height: 20px;
+        overflow: hidden;
+    }
+
+    .person {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+
+        margin-top: 150px;
+    }
+
+    .person > img {
+        width: 50px;
+        height: 50px;
+        margin: 0 20px 0 0;
+    }
+
+    .inf {
+        margin: 0;
+    }
+
+    .inf > p {
+        margin: 0;
+        font-weight: 500;
+        font-size: 18px;
+    }
+
+    #btn, #btn_quest, #btn_add {
+    padding: 20px 50px;
+    margin-top: 30px;
+    margin-bottom: 10px;
+
+    border-radius: 15px;
+    background-color: #832492;
+    border: none;
+    color: white;
+    transition: all .5s linear;
+    }
+
+    #btn:hover, #btn_quest:hover, #btn_add:hover {
+        border-radius: 15px;
+        background-color: white;
+        border: 2px solid #832492;
+        color: #832492;
+        cursor: pointer;
+    }
+
+    </style>
+</head>
+<body>
+    <div class="block">
+        <div class="main">
+            <div class="header">
+                <p>Форма вопросов</p>
+            </div>
+            <div class="inputs">
+                <textarea name="question" id="question" cols="30" rows="2" placeholder="Введите ваш вопрос"></textarea>
+                <input type="submit" value="Отправить" id="btn_quest">
+            </div>
+            <div class="person">
+                <img src="C:\Users\Вадим\Documents\GitHub\MTOIP\Doc\woman.png" alt="i">
+                <div class="inf">
+                    <p>Имя Фамилия</p>
+                    <p>89173085293</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
