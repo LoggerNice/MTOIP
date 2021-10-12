@@ -1,19 +1,25 @@
 var http = require('http');
-var fs = require('fs');
+var experss = require('express');
 
-var server = http.createServer(function(req, res) {
-	if (req.url === '/reg.html' || req.url === '/') {
-		res.writeHead(200, {'Content-Type': 'text/html; charset=utf-8'});
-		fs.createReadStream(__dirname + '/reg.html', 'utf8').pipe(res);
-	}
-	else if (req.url === '/main.html') {
-		res.writeHead(200, {'Content-Type': 'text/html; charset=utf-8'});
-		fs.createReadStream(__dirname + '/main.html', 'utf8').pipe(res);
-	}
-	else if (req.url === '/quest.html') {
-		res.writeHead(200, {'Content-Type': 'text/html; charset=utf-8'});
-		fs.createReadStream(__dirname + '/quest.html', 'utf8').pipe(res);
-	}
+var app = experss();
+var bodyParser = require('body-parser');
+var urlencodedParser = bodyParser.urlencoded({ extended: false });
+
+app.set('');
+app.get('/reg.html', function(req, res) {
+	res.sendFile(__dirname + '/reg.html');
 });
 
-server.listen(3000, '127.0.0.1');
+app.post('/reg', urlencodedParser, function (req, res) {
+	res.send('welcome, ' + req.body.login);
+});
+
+app.get('/main.html', function(req, res) {
+	res.sendFile(__dirname + '/main.html');
+});
+
+app.get('/quest.html', function(req, res) {
+	res.sendFile(__dirname + '/quest.html');
+});
+
+app.listen(3000);

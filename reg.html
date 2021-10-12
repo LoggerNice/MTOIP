@@ -109,22 +109,24 @@
     </style>
 </head>
 <body>
-    <div class="block">
-        <div class="main">
-            <div class="header">
-                <a href="main.html">Авторизация</a>
-                <a href="reg.html" id="activ">Регистрация</a>
-            </div>
-            <div class="inputs">
-                <input type="text" id="login" placeholder="Логин">
-                <input type="text" id="phone" placeholder="Номер телефона">
-                <input type="text" id="mail" placeholder="E-mail">
-                <input type="text" id="password" placeholder="Пароль">
-                <input type="text" id="password_repeat" placeholder="Повторите пароль">
-                <input type="submit" value="Создать" id="btn_add">
-                <p>*если у вас есть аккаунт, то <a href="main.html">войдите</a></p>
+    <form method="post" action="/reg">
+        <div class="block">
+            <div class="main">
+                <div class="header">
+                    <a href="main.html">Авторизация</a>
+                    <a href="reg.html" id="activ">Регистрация</a>
+                </div>
+                <div class="inputs">
+                    <input type="text" id="login" placeholder="Логин">
+                    <input type="text" id="phone" placeholder="Номер телефона">
+                    <input type="text" id="mail" placeholder="E-mail">
+                    <input type="text" id="password" placeholder="Пароль">
+                    <input type="text" id="password_repeat" placeholder="Повторите пароль">
+                    <input type="submit" value="Создать" id="btn_add">
+                    <p>*если у вас есть аккаунт, то <a href="main.html">войдите</a></p>
+                </div>
             </div>
         </div>
-    </div>
+    </form>
 </body>
 </html>
