@@ -1,25 +1,17 @@
-var http = require('http');
-var experss = require('express');
-
-var app = experss();
 var bodyParser = require('body-parser');
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
+var express = require('express');
+var app = express();
+var registration = require('./modules/inputs');
+var database = require('./modules/database');
 
-app.set('');
-app.get('/reg.html', function(req, res) {
-	res.sendFile(__dirname + '/reg.html');
-});
+app.use(express.static('links'));
 
 app.post('/reg', urlencodedParser, function (req, res) {
-	res.send('welcome, ' + req.body.login);
-});
-
-app.get('/main.html', function(req, res) {
-	res.sendFile(__dirname + '/main.html');
-});
-
-app.get('/quest.html', function(req, res) {
-	res.sendFile(__dirname + '/quest.html');
+	if (registration.appPost(req, res) == 5) {
+		database.insertDate(req, res);
+	}
 });
 
 app.listen(3000);
+console.log("Сервер запущен");
