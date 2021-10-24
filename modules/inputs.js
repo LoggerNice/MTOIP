@@ -23,7 +23,7 @@ function errPass(inputPass, inputPass2) {
     }
 }
 
-module.exports.appPost = function(req, res) {
+exports.appPost = function(req, res) {
     var data = req.body;
     var count = 0;
     

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+    <title>Регистрация</title>
+
+    <style>
+    * {
+    margin: 0 auto;
+    padding: 0;
+
+    font-family: 'Montserrat', sans-serif;
+    }
+
+    body {
+        background-color: #832492;
+        font-weight: 400;
+    }
+
+    .block {
+        width: auto;
+        height: auto;
+
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+        align-content: center;
+    }
+
+    .main {
+        width: 600px;
+        height: 600px;
+        margin-top: 50px;
+
+        border-radius: 20px;
+        background-color: white;
+        filter: drop-shadow(0 0 20px #ffffffce);
+    }
+
+    .header {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        justify-content: space-around;
+    }
+
+    .header > a, p {
+        margin: 40px 0 80px 0;
+        font-weight: 700;
+        font-size: 24px;
+        color: #222;
+        text-decoration: none;
+    }
+
+    table {
+        font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+        font-size: 14px;
+        background: white;
+        max-width: 70%;
+        width: 70%;
+        border-collapse: collapse;
+        text-align: left;
+    }
+
+    th {
+        font-weight: normal;
+        color: #039;
+        border-bottom: 2px solid #6678b1;
+        padding: 10px 8px;
+    }
+    </style>
+</head>
+<body>
+    <form>
+        <div class="block">
+            <div class="main">
+                <div class="header">
+                    <p>Список сообщений</p>
+                </div>
+                <table>
+                    <tr>
+                      <th>Имя</th>
+                      <th>Вопрос</th>
+                      <th>Фото</th>
+                    <% for(var i=0; i < rows.length; i++) {%>
+                    <tr>
+                       <th><%= rows[i].name %></th> 
+                       <th><%= rows[i].quest %></th>
+                       <th><img src="<%= rows[i].photo %>" width="200px" height="150 px"></th>
+                    <% } %>
+                  </table>
+            </div>
+        </div>
+    </form>
+</body>
+</html>

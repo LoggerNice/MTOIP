@@ -1,27 +1,38 @@
 var sqlite3 = require('sqlite3').verbose();
-var db = new sqlite3.Database('users.db');
+const bcrypt = require('bcrypt');
+const e = require('express');
 
-module.exports.insertDate = async function(req, res) {
-    var data = req.body;
+var data;
+var db = new sqlite3.Database('./users.db');
 
-    try {
-        const hashedPassword = await bcrypt.hash(data.inpPassword, 7);
-        users.push({
-            login: data.inpLogin,
-            password: hashedPassword,
-            phone: data.inpPhone,
-            mail: data.inpMail
-        });
-        res.redirect('/main');
-    } catch {
-        res.redirect('/reg');
-    }
-
+exports.insertDate = async function(req, res) {
+    data = req.body;
+    const hash = await bcrypt.hash(data.inpPassword, 7);
+    
     db.serialize(function() {
-        var stmt = db.prepare("INSERT INTO users VALUES (?, ?, ?, ?, ?)");
-        stmt.run("Ipsum " + i);
+        var stmt = db.prepare("INSERT INTO users (login, password, phone, mail) VALUES (?, ?, ?, ?)");
+        stmt.run(data.inpLogin, hash, data.inpPhone, data.inpMail);
         stmt.finalize();
     });
+    
+    db.close();
 }
 
-db.close();
+exports.insertQuestDate = async function(req, res) {
+    data = req.body;
+    const storage = require('./upload');
+
+    db.serialize(function() {
+        var stmt = db.prepare("INSERT INTO questions (quest, photo, name) VALUES (?, ?, ?)");
+        stmt.run(data.inpQuestion, storage.getFilename(), data.inpLogin);
+        stmt.finalize();
+    });
+
+    db.close();
+}
+
+exports.selectDate = async function(res) {
+    db.all('SELECT quest, photo, name FROM questions', (err, rows) => { 
+	    res.render('list', {rows: rows});
+    });
+}
