@@ -1,4 +1,5 @@
 const bodyParser = require('body-parser');
+const path = require('path');
 const multer = require('multer');
 const urlencodedParser = bodyParser.urlencoded({ extended: false });
 
@@ -20,8 +21,8 @@ app.post('/reg', urlencodedParser, function (req, res) {
 });
 
 const storage = require('./modules/upload');
-const upload = multer({storage: storage.getStorage()});
-app.post("/upload", upload.single("image"), (req, res) => {
+app.use(multer({storage: storage.getStorage()}).single("image"));
+app.post("/upload", (req, res) => {
     console.log("Файл загружен ");
 });
 

@@ -1,21 +1,25 @@
 const multer = require('multer');
 const path = require('path');
-var filename;
+let fs = require('fs-extra');
+
+let filename; 
 
 exports.getStorage = function() {
     let storage = multer.diskStorage({
         destination: (req, file, cb) => {
-            cb(null, 'uploads');
+            let type = req.params.type;
+            let path = `./views/uploads`;
+            fs.mkdirsSync(path);
+            cb(null, path);
         },
         filename: (req, file, cb) => {
-            filename = file.fieldname + '-' + Date.now() + '-' + file.originalname;
+            filename = file.originalname
             cb(null, filename);
         },
     });
-    
     return storage;
 }
 
 exports.getFilename = function() {
-    return "uploads/" + filename;
+    return "../uploads/" + filename;
 }

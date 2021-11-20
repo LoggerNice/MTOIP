@@ -32,7 +32,8 @@ exports.insertQuestDate = async function(req, res) {
 }
 
 exports.selectDate = async function(res) {
-    db.all('SELECT quest, photo, name FROM questions', (err, rows) => { 
-	    res.render('list', {rows: rows});
+    db.all('SELECT quest, photo, name FROM questions', (err, rows) => {
+        let len = rows.length
+	    res.render('list', {rows: rows, len: len});
     });
 }

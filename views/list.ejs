@@ -33,8 +33,8 @@
 
     .main {
         width: 600px;
-        height: 600px;
         margin-top: 50px;
+        padding-bottom: 50px;
 
         border-radius: 20px;
         background-color: white;
@@ -86,7 +86,7 @@
                       <th>Имя</th>
                       <th>Вопрос</th>
                       <th>Фото</th>
-                    <% for(var i=0; i < rows.length; i++) {%>
+                    <% for(var i=0; i < len; i++) {%>
                     <tr>
                        <th><%= rows[i].name %></th> 
                        <th><%= rows[i].quest %></th>
