@@ -2,18 +2,16 @@ const multer = require('multer');
 const path = require('path');
 let fs = require('fs-extra');
 
-let filename; 
-
+let filename = ""; 
 exports.getStorage = function() {
     let storage = multer.diskStorage({
         destination: (req, file, cb) => {
-            let type = req.params.type;
             let path = `./views/uploads`;
-            fs.mkdirsSync(path);
+            fs.mkdirs(path);
             cb(null, path);
         },
         filename: (req, file, cb) => {
-            filename = file.originalname
+            filename = file.originalname;
             cb(null, filename);
         },
     });
