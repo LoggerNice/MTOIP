@@ -7,7 +7,7 @@ exports.getStorage = function() {
     let storage = multer.diskStorage({
         destination: (req, file, cb) => {
             let path = `./views/uploads`;
-            fs.mkdirs(path);
+            fs.mkdirsSync(path);
             cb(null, path);
         },
         filename: (req, file, cb) => {
