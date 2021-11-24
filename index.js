@@ -24,15 +24,15 @@ app.post('/quest', urlencodedParser, function (req, res) {
 });
 
 
-const registration = require('./modules/inputs');
 app.post("/uploadDoc", (req, res) => {
 	console.log("Документ загружен");
 });
 
+const registration = require('./modules/inputs');
 app.post('/reg', urlencodedParser, function (req, res) {
-	if (registration.appPost(req, res) == 5) {
-		database.insertDate(req, res);
-	}
+		if (registration.appPost(req, res) == 5) {
+			database.insertDate(req, res);
+		}
 });
 
 app.listen(3000);
