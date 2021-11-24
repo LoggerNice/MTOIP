@@ -21,8 +21,8 @@ app.post("/uploadPhoto", (req, res) => {
 
 app.post('/quest', urlencodedParser, function (req, res) {
 	database.insertQuestDate(req, res);	
+	res.redirect("list");
 });
-
 
 app.post("/uploadDoc", (req, res) => {
 	console.log("Документ загружен");
@@ -32,6 +32,7 @@ const registration = require('./modules/inputs');
 app.post('/reg', urlencodedParser, function (req, res) {
 		if (registration.appPost(req, res) == 5) {
 			database.insertDate(req, res);
+			res.redirect("quest.html");
 		}
 });
 
