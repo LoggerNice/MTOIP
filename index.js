@@ -4,11 +4,12 @@ const path = require('path');
 const urlencodedParser = bodyParser.urlencoded({ extended: false });
 const express = require('express');
 const app = express();
+const bcrypt = require('bcrypt');
 
 app.use(express.static('views'));
 app.set('view engine', 'ejs');
 
-const database = require('./modules/database');
+const database = require('./modules/database.js');
 app.get('/list', function(req, res) {
 	database.selectDate(res);
 });
@@ -19,10 +20,14 @@ app.post("/uploadPhoto", (req, res) => {
 	console.log("Фото загружено");
 });
 
-app.post('/quest', urlencodedParser, function (req, res) {
-	database.insertQuestDate(req, res);	
+app.post('/autorization', urlencodedParser, function (req, res) {
+	database.selectUser(req, res);
 });
 
+app.post('/quest', urlencodedParser, function (req, res) {
+	database.insertQuestDate(req, res);
+	res.redirect("list");	
+});
 
 app.post("/uploadDoc", (req, res) => {
 	console.log("Документ загружен");
@@ -30,9 +35,10 @@ app.post("/uploadDoc", (req, res) => {
 
 const registration = require('./modules/inputs');
 app.post('/reg', urlencodedParser, function (req, res) {
-		if (registration.appPost(req, res) == 5) {
-			database.insertDate(req, res);
-		}
+	if (registration.appPost(req, res) == 5) {
+		database.insertDate(req, res);
+		res.redirect('autorization.html');
+	}
 });
 
 app.listen(3000);

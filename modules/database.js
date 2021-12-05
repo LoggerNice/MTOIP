@@ -4,6 +4,7 @@ const e = require('express');
 
 const storage = require('./upload');
 var data;
+var dataLogin;
 
 exports.insertDate = async function(req, res) {
     var db = new sqlite3.Database('./users.db');
@@ -38,4 +39,27 @@ exports.selectDate = async function(res) {
         let len = rows.length
 	    res.render('list', {rows: rows, len: len});
     });
+}
+
+exports.selectUser = async function(req, res) {
+    dataLogin = req.body;
+    let sql = 'SELECT login, password FROM users WHERE login = ?';
+    var db = new sqlite3.Database('./users.db');
+    
+    db.get(sql, [dataLogin.loginUser], (err, row) => {
+        if (err) {
+            console.error(err.message);
+        }
+        row ? console.log("Пользователь был найден") : console.log(`Не было найдено пользователя ${dataLogin.loginUser}`);
+        
+        const validPass = bcrypt.compareSync(dataLogin.loginPass, row.password);
+        if (!validPass) {
+            return console.log("Неверный пароль!");
+        }
+        else {
+            res.redirect("quest.html");
+            return console.log("Замечательно, все верно");
+        }
+    });
+
 }
