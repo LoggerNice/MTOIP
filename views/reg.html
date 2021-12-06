@@ -175,7 +175,27 @@
         }
     }
 
+    function capcha() {
+        var first = Math.floor(Math.random() * 10);
+        var second = Math.floor(Math.random() * 10);
+        var sum = first + second;
+
+        var test = prompt("Введите сумму чисел: " + first + " + " + second, '');
+        if (test == sum) {
+            return true;
+        }
+        else {
+            alert("Неверный ответ!");
+            return false;
+        }
+    }
+
     function appPost(){
-        count = errOneType("login") + errPhone("phone") + errOneType("mail") + errOneType("password") + errPass("password","password_repeat");
+        if (capcha()) {
+            count = errOneType("login") + errPhone("phone") + errOneType("mail") + errOneType("password") + errPass("password","password_repeat");
+        }
+        else {
+            capcha();
+        }
     }
 </script>
