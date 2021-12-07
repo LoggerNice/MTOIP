@@ -1,0 +1,60 @@
+В работе по Node JS контроллером является файл index.js, поскольку он включает в себя обработку данных и запросов пользователя, а в последствии осуществляет работу с файлом базы данных, который в свою очередь является моделью, поскольку выполняет SQL-запросы на работу с полученными данными. За представление отвечают файлы html и ejs, которые предоставляют пользователю информацию, содержащуюся в модели.
+
+Файл index.js:
+const registration = require('./modules/inputs');
+app.post('/reg', urlencodedParser, function (req, res) {
+	if (registration.appPost(req, res) == 5) {
+		database.insertDate(req, res);
+		res.redirect('autorization.html');
+	}
+});
+
+app.listen(3000);
+console.log("Сервер запущен");
+
+
+Файл базы данных:
+exports.insertDate = async function(req, res) {
+    var db = new sqlite3.Database('./users.db');
+    data = req.body;
+    const hash = await bcrypt.hash(data.inpPassword, 7);
+    
+    db.serialize(function() {
+        var stmt = db.prepare("INSERT INTO users (login, password, phone, mail, document) VALUES (?, ?, ?, ?, ?)");
+        stmt.run(data.inpLogin, hash, data.inpPhone, data.inpMail, storage.getFilename());
+        stmt.finalize();
+    });
+    
+    db.close();
+}
+
+Файл html:
+</head>
+<body>
+    <div class="block">
+        <div class="main">
+            <div class="header">
+                <a href="reg.html" id="activ">Регистрация</a>
+            </div>
+            <form method="post" action="/uploadDoc" enctype="multipart/form-data">
+                <div class="download">
+                    <p class="pht">Загрузите документ</p>
+                    <p class="pht"><input type="file" name="image" multiple accept="*">
+                    <input type="submit" value="Отправить">
+                </div>
+            </form>
+            <form method="post" action="/reg">
+                <div class="inputs">
+                    <input type="text" name="inpLogin" id="login" placeholder="Логин">
+                    <input type="text" name="inpPhone" id="phone" placeholder="Номер телефона">
+                    <input type="text" name="inpMail" id="mail" placeholder="E-mail">
+                    <input type="password" name="inpPassword" id="password" placeholder="Пароль">
+                    <input type="password" name="inpPassword_repeat" id="password_repeat" placeholder="Повторите пароль">
+                    <input type="submit" value="Создать" id="btn_add" onclick="return appPost()">
+                    <p>*если у вас есть аккаунт, то <a href="autorization.html">войдите</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
